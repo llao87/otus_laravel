@@ -1,0 +1,72 @@
+services:
+    app:
+        build:
+            dockerfile: ./docker/php/Dockerfile
+            args:
+                WWWUSER: ${WWWUSER}
+                WWWGROUP: ${WWWGROUP}
+        restart: always
+        container_name: otus-app
+        working_dir: /var/www/otus
+        volumes:
+            - ./src:/var/www/otus/:rw
+        depends_on:
+            - postgres
+        networks:
+            - otus-network
+    postgres:
+        image: postgres:16-alpine
+        container_name: otus-db
+        restart: unless-stopped
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - pg_data:/var/lib/postgresql/data
+        networks:
+            - otus-network
+    nginx:
+        image: nginx:alpine
+        container_name: otus-nginx
+        restart: always
+        ports:
+            - "80:80"
+        volumes:
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:rw
+        depends_on:
+            - app
+        networks:
+            - otus-network
+
+    redis:
+        image: redis:alpine
+        container_name: otus-redis
+        restart: always
+        volumes:
+            - ./redis_data:/data
+        networks:
+            - otus-network
+
+    adminer:
+        image: adminer:latest
+        container_name: otus-adminer
+        restart: always
+        ports:
+            - 8080:8080
+        environment:
+            ADMINER_DEFAULT_SERVER: otus-db
+            ADMINER_DATABASE: ${DB_DATABASE}
+        depends_on:
+            - postgres
+        networks:
+            - otus-network
+volumes:
+    db_data:
+    redis_data:
+
+networks:
+    otus-network:
+        driver: bridge
