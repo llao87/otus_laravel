@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-alpine AS base
+FROM php:8.4-fpm-alpine AS base
 
 ENV NODE_VERSION=10.15.3
 

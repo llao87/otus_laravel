@@ -25,7 +25,7 @@ services:
             POSTGRES_USER: ${DB_USERNAME}
             POSTGRES_PASSWORD: ${DB_PASSWORD}
         volumes:
-            - pg_data:/var/lib/postgresql/data
+            - ./dbdata:/var/lib/postgresql/data
         networks:
             - otus-network
     nginx:
@@ -36,6 +36,7 @@ services:
             - "80:80"
         volumes:
             - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:rw
+            - ./src:/var/www/otus:rw
         depends_on:
             - app
         networks:
