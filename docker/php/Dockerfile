@@ -37,6 +37,9 @@ RUN pecl install redis amqp msgpack \
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+COPY ./docker/php/www.conf /usr/local/etc/php-fpm.d/www.conf
+
+
 # COPY .docker/php/php.ini /usr/local/etc/php/conf.d/custom.ini
 
 # RUN mkdir -p /var/log/supervisor \
