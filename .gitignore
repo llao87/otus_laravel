@@ -1,8 +1,6 @@
 # Laravel
 /src/vendor/
 /src/node_modules/
-/src/.env
-/src/.env.*.local
 /src/storage/logs/*
 /src/storage/framework/cache/*
 /src/storage/framework/sessions/*
@@ -40,10 +38,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 storage/logs/
-
-# System files
-.env.local
-.env.*.local
 
 # PHPUnit
 /src/phpunit.xml
