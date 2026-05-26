@@ -1,11 +1,12 @@
 # Laravel
-/src/vendor/
-/src/node_modules/
-/src/storage/logs/*
-/src/storage/framework/cache/*
-/src/storage/framework/sessions/*
-/src/storage/framework/views/*
-/src/bootstrap/cache/
+/app/vendor/
+/app/node_modules/
+/app/storage/logs/*
+/app/storage/framework/cache/*
+/app/storage/framework/sessions/*
+/app/storage/framework/views/*
+/app/bootstrap/cache/
+.env
 
 # Database
 /dbdata/
@@ -40,4 +41,4 @@ yarn-error.log*
 storage/logs/
 
 # PHPUnit
-/src/phpunit.xml
+/app/phpunit.xml

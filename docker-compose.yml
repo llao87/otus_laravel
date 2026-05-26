@@ -9,7 +9,7 @@ services:
         container_name: otus-app
         working_dir: /var/www/otus
         volumes:
-            - ./src:/var/www/otus/:rw
+            - ./app:/var/www/otus/:rw
             - php_socket:/var/run/php-fpm
             
         depends_on:
@@ -38,7 +38,7 @@ services:
             - "80:80"
         volumes:
             - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:rw
-            - ./src:/var/www/otus:rw
+            - ./app:/var/www/otus:rw
             - php_socket:/var/run/php-fpm
         depends_on:
             - app
